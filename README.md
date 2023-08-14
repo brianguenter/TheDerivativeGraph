@@ -2,6 +2,8 @@
 
 The derivative graph is a data structure that represents the derivative of a function as a graph. It is both a means of implementing efficient automatic differentiation (AD) algorithms and a more perspicuous way of analyzing and understanding these algorithms. The derivative graph is a powerful new tool which gives the developer great flexibility when designing new general purpose AD systems.
 
+![title](Forward_binary_tree_bin_path1.svg)
+
 In this document you will learn 
 * how the derivative graph is derived from the chain rule of Calculus.
 * that there is no fundamental difference between symbolic differentiation and automatic differentiation. You may be surprised to learn that the most efficient AD algorithms are purely symbolic.
@@ -13,12 +15,12 @@ In this document you will learn
 ## The Chain Rule and the Derivative Graph
 sum of products of terms where each term is a partial derivative a of function node wrt to one of its children.
 ### What is Automatic Differentiation anyway?
-What is automatic differentiation? It is any algorithm which computes the sum of products of the edges in the derivative graph, while treating the derivative values at the edges as opaque quantities. Example:
+What is automatic differentiation? An algorithm which computes the sum of products of the edges in the derivative graph, while treating the derivative values at the edges as opaque quantities. The goal of AD algorithm development is to minimize the number of additions and multiplications required to evaluate the sum of products. There are only two ways to do this: factor out common terms and compute common subexpressions so that expressions that are more commonly used are computed before less commonly used expressions. Example:
 
-The goal of AD algorithm development is to minimize the number of additions and multiplications required to evaluate the sum of products. There are only two ways to do this: factor out common terms and compute common subexpressions so that expressions that are more commonly used are computed before less commonly used expressions. Example:
 
 ## Creating an AD algorithm from scratch
 ###  R¹->Rⁿ
+
 ###  Rⁿ->R¹
 
 ### Forward and Reverse

@@ -1,0 +1,4 @@
+name = "TheDerivativeGraph"
+uuid = "bed56180-42c7-4885-9189-8432f94a8016"
+authors = ["brianguenter <1brianguenter@gmail.com>"]
+version = "0.1.0"
