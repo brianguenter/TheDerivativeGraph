@@ -4,13 +4,21 @@ The derivative graph is a data structure that represents the derivative of a fun
 
 ![title](Forward_binary_tree_bin_path1.svg)
 
-In this document you will learn 
+In this document you will learn
+* how the derivative graph is related to the original function graph. 
 * how the derivative graph is derived from the chain rule of Calculus.
 * that there is no fundamental difference between symbolic differentiation and automatic differentiation. You may be surprised to learn that the most efficient AD algorithms are purely symbolic.
 * how to design efficient AD algorithms using a few simple heuristics.
 * how forward and reverse are essentially the same. 
 * how to improve on forward and reverse with an AD algorithm that computes efficient derivatives for any Rⁿ->Rᵐ.
 * how algorithms for computing Jv, vᵀJ, and Hv, are structurally identical; they all reduce to simple edge insertion in the derivative graph. 
+
+<img style="display: block; margin: auto;"
+src="Forward_binary_tree_bin_path1.svg">
+
+<p style="text-align: center;">
+One path through derivative graph relating \partial 
+</p>
 
 ## The Chain Rule and the Derivative Graph
 sum of products of terms where each term is a partial derivative a of function node wrt to one of its children.
