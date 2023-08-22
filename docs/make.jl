@@ -4,8 +4,8 @@ using TheDerivativeGraph
 makedocs(
     sitename="TheDerivativeGraph",
     format=Documenter.HTML(),
-    modules=[TheDerivativeGraph]
-    pages = [
+    modules=[TheDerivativeGraph],
+    pages=[
         "index.md",
         "The Derivative Graph" => thederivativegraph.md,
         "Future work" => "futurework.md",
