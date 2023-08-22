@@ -13,8 +13,9 @@ function write_illustrations()
             full_name = "$(package)_$(package.binary_tree)_$mod"
             no_project = split(full_name, ".")[2]
 
-            path = "illustrations/$(no_project)"
+            path = "docs/src/illustrations/$(no_project)"
             write_dot(path * ".svg", make_dot_graph(mod(package.binary_tree())))
+            write_dot(path * "D.svg", make_dot_graph(mod(package.binary_tree()), false))
             rm(path * ".dot")
         end
     end

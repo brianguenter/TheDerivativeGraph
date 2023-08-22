@@ -2,7 +2,7 @@
 
 The derivative graph is a data structure that represents the derivative of a function as a graph. It is both a means of implementing efficient automatic differentiation (AD) algorithms and a more perspicuous way of analyzing and understanding these algorithms. The derivative graph is a powerful new tool which gives the developer great flexibility when designing new general purpose AD systems.
 
-![title](Forward_binary_tree_bin_path1.svg)
+
 
 In this document you will learn
 * how the derivative graph is related to the original function graph. 
@@ -12,9 +12,6 @@ In this document you will learn
 * how forward and reverse are essentially the same. 
 * how to improve on forward and reverse with an AD algorithm that computes efficient derivatives for any Rⁿ->Rᵐ.
 * how algorithms for computing Jv, vᵀJ, and Hv, are structurally identical; they all reduce to simple edge insertion in the derivative graph. 
-
-<img style="display: block; margin: auto;"
-src="Forward_binary_tree_bin_path1.svg">
 
 <p style="text-align: center;">
 One path through derivative graph relating \partial 
@@ -28,6 +25,15 @@ What is automatic differentiation? An algorithm which computes the sum of produc
 
 ## Creating an AD algorithm from scratch
 ###  R¹->Rⁿ
+![Path 1](illustrations/Forward_binary_tree_bin_path1.svg)
+![Path 2](illustrations/Forward_binary_tree_bin_path2.svg)
+
+![Path 3](illustrations/Forward_binary_tree_Dterm_weights.svg)
+
+![Path 3](illustrations/Forward_binary_tree_Dterm_weights.svg)
+![Path 3](illustrations/Forward_binary_tree_Dterm_weightsD.svg)
+
+
 
 ###  Rⁿ->R¹
 
