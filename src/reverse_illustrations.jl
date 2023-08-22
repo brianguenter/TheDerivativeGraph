@@ -1,6 +1,6 @@
 
 module Reverse
-using ..GraphVisualization
+using ..TheDerivativeGraph
 
 function binary_tree()
     n1 = Node("cos", "f0")

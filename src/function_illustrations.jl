@@ -1,5 +1,5 @@
 module Functions
-using ..GraphVisualization
+using ..TheDerivativeGraph
 
 function times()
   root = Node("*")

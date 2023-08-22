@@ -6,3 +6,5 @@ version = "0.1.0"
 [deps]
 Documenter = "e30172f5-a6a5-5a46-863b-614d45cd2de4"
 DocumenterTools = "35a29f4d-8980-5a13-9543-d66fff28ecb8"
+FastDifferentiation = "eb9bf01b-bf85-4b60-bf87-ee5de06c00be"
+TestItemRunner = "f8b46487-2199-4994-9208-9a1283c18c0a"
