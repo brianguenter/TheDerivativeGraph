@@ -1,12 +1,12 @@
-struct Node
-    id::Symbol
-    function_label::String
+mutable struct Node
+    const id::Symbol
+    const function_label::String
     derivative_label::String
     color::NTuple{3,UInt8}
-
-    Node(function_label::String) = new(gensym(:node), function_label, "", white)
+    label_color::NTuple{3,UInt8}
+    Node(function_label::String) = new(gensym(:node), function_label, "", white, black)
     # Node(function_label::String, color::NTuple{3,UInt8}) = new(gensym(:node), function_label, "", color)
-    Node(function_label::String, derivative_label::String) = new(gensym(:node), function_label, derivative_label, white)
+    Node(function_label::String, derivative_label::String) = new(gensym(:node), function_label, derivative_label, white, black)
 end
 export Node
 
@@ -15,6 +15,7 @@ function_label(n::Node) = "\"$(n.function_label)\""
 derivative_label(n::Node) = "\"$(n.derivative_label)\""
 export derivative_label
 color(n::Node) = n.color
+label_color(n::Node) = n.label_color
 export color
 
 pastel(col::NTuple{3,UInt8}) = UInt8.(map(x -> min(255, x + 200), col))
@@ -25,16 +26,18 @@ const blue = (0x00, 0x00, 0xff)
 const red = (0xff, 0x00, 0x00)
 const green = (0x00, 0xff, 0x00)
 const white = (0xff, 0xff, 0xff)
-export red, green, blue, white
+const black = (0x00, 0x00, 0x00)
+export red, green, blue, white, black
 
 mutable struct Edge
     const id::Symbol
     label::String
     color::NTuple{3,UInt8}
+    label_color::NTuple{3,UInt8}
     const top::Node
     const bott::Node
 
-    Edge(label::String, top::Node, bott::Node) = new(gensym(:edge), label, blue, top, bott)
+    Edge(label::String, top::Node, bott::Node) = new(gensym(:edge), label, blue, black, top, bott)
 end
 export Edge
 
@@ -43,6 +46,7 @@ bott(e::Edge) = e.bott
 id(e::Edge) = "\"e.id\""
 label(e::Edge) = "\"$(e.label)\""
 color(e::Edge) = e.color
+label_color(e::Edge) = e.label_color
 
 color_name(color::NTuple{3,UInt8}) = "#$(bytes2hex(color))"
 color_name(n::Node) = color_name(color(n))
@@ -69,7 +73,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
     nodes = unique((top.(edges)..., bott.(edges)...))
     res = """strict digraph{
       """
-    println(nodes)
+
     for node in nodes
         if function_graph
             height = 0.05
@@ -81,7 +85,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
             node_label = derivative_label(node)
         end
 
-        res *= "$(id(node)) [color=\"$(color_name(node))\",shape=ellipse,height=$height,width=$width,fontsize=10,margin = 0,fillcolor=\"$(color_name(pastel(color(node))))\",style=filled, label = $node_label]\n"
+        res *= "$(id(node)) [color=\"$(color_name(node))\",shape=ellipse,height=$height,width=$width,fontsize=10,margin = 0,fillcolor=\"$(color_name(pastel(color(node))))\",style=filled, label = $node_label , fontcolor = \"$(color_name(label_color(node)))\"] \n"
     end
     for edge in edges
         if function_graph
@@ -89,10 +93,10 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
         else
             edge_label = label(edge)
         end
-        res *= "$(id(top(edge))) -> $(id(bott(edge))) [arrowsize = 0, label=$edge_label, color=\"$(color_name(color(edge)))\", fontsize = 10]\n"
+        res *= "$(id(top(edge))) -> $(id(bott(edge))) [arrowsize = 0, label=$edge_label, color=\"$(color_name(color(edge)))\", fontsize = 10, fontcolor = \"$(color_name(label_color(edge)))\"]\n"
     end
     res *= "}"
-    println(res)
+
     return res
 end
 export draw_graph
@@ -102,7 +106,7 @@ function write_dot(filename, dot_string::String)
     name, ext = splitext(filename)
     name = name * ".dot"
     ext = ext[2:end] #get rid of leading dot
-    println(pwd())
+
     io = open(name, "w")
     write(io, dot_string)
     close(io)
