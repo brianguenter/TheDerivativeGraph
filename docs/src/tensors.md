@@ -18,3 +18,12 @@
 1 & j=k
 \end{cases}
 ```
+
+![BAx](illustrations/BAx/BAx_illustration.svg)
+
+![BAx partial](illustrations/BAx/BAx_partial_xj_step1D.svg)
+![BAx partial](illustrations/BAx/BAx_partial_xj_step2D.svg)
+![BAx partial](illustrations/BAx/BAx_partial_xj_step3D.svg)
+![BAx partial](illustrations/BAx/BAx_partial_xj_step4D.svg)
+
+

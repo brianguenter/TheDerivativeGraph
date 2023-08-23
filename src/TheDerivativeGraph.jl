@@ -25,10 +25,10 @@ function write_illustrations()
 
     for BAx_example in BAx_all()
         full_name = "$BAx_example"
-        println(full_name)
-        path = dir * full_name
 
-        if BAx_example === BAx
+        path = dir * "BAx/" * full_name
+
+        if BAx_example === BAx_illustration
             graph = make_dot_graph(BAx_example())
             write_dot(path * ".svg", graph)
         else
