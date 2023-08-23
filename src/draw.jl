@@ -73,7 +73,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
     nodes = unique((top.(edges)..., bott.(edges)...))
     res = """strict digraph{
       """
-
+    font_size = 12
     for node in nodes
         if function_graph
             height = 0.05
@@ -85,7 +85,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
             node_label = derivative_label(node)
         end
 
-        res *= "$(id(node)) [color=\"$(color_name(node))\",shape=ellipse,height=$height,width=$width,fontsize=10,margin = 0,fillcolor=\"$(color_name(pastel(color(node))))\",style=filled, label = $node_label , fontcolor = \"$(color_name(label_color(node)))\"] \n"
+        res *= "$(id(node)) [color=\"$(color_name(node))\",shape=ellipse,height=$height,width=$width,fontsize=$font_size,margin = 0,fillcolor=\"$(color_name(pastel(color(node))))\",style=filled, label = $node_label , fontcolor = \"$(color_name(label_color(node)))\"] \n"
     end
     for edge in edges
         if function_graph
@@ -93,7 +93,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
         else
             edge_label = label(edge)
         end
-        res *= "$(id(top(edge))) -> $(id(bott(edge))) [arrowsize = 0, label=$edge_label, color=\"$(color_name(color(edge)))\", fontsize = 10, fontcolor = \"$(color_name(label_color(edge)))\"]\n"
+        res *= "$(id(top(edge))) -> $(id(bott(edge))) [arrowsize = 0, label=$edge_label, color=\"$(color_name(color(edge)))\", fontsize = $font_size, fontcolor = \"$(color_name(label_color(edge)))\"]\n"
     end
     res *= "}"
 

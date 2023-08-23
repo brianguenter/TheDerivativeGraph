@@ -50,7 +50,7 @@ function BAx_partial_xj_step1()
     e1, e2, e3, e4, e5, e6 = BAx_partial_xj()
 
     n2 = bott(e2)
-    n2.derivative_label = "sub((j=>n),xₙ)"
+    n2.derivative_label = "sub((j=>n),xⱼ)"
     return (e1, e2, e3, e4, e5, e6)
 end
 export BAx_partial_xj_step1

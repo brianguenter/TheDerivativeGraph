@@ -7,10 +7,10 @@ include("function_illustrations.jl")
 include("shared.jl")
 include("reverse_illustrations.jl")
 include("forward_illustrations.jl")
-include("examples.jl")
+include("BAx.jl")
 
 function write_illustrations()
-    dir = "docs/src/illustrations/"
+    dir = "src/illustrations/"
     for mod in Shared.modifiers
         for package in (Forward, Reverse)
             full_name = "$(package)_$(package.binary_tree)_$mod"
@@ -20,6 +20,18 @@ function write_illustrations()
             write_dot(path * ".svg", make_dot_graph(mod(package.binary_tree())))
             write_dot(path * "D.svg", make_dot_graph(mod(package.binary_tree()), false))
             rm(path * ".dot")
+        end
+    end
+
+    for Ab_example in Ab_all()
+        full_name = "Ab_example"
+        path = dir * "Ab/" * full_name
+        if Ab_example === Ab_illustration
+            graph = make_dot_graph(Ab_example())
+            write_dot(path * ".svg", graph)
+        else
+            graph = make_dot_graph(Ab_example(), false)
+            write_dot(path * "D.svg", graph)
         end
     end
 
@@ -45,6 +57,7 @@ export write_illustrations
 #     b = make_variables(:b,3)
 
 #     tmp = Node.(A*b)
+
 
 
 end #module
