@@ -8,7 +8,7 @@ makedocs(
     pages=[
         "index.md",
         "The Derivative Graph" => "thederivativegraph.md",
-        "Future work" => "futurework.md"
+        "Tensor Derivative" => "tensors.md"
     ]
 )
 
