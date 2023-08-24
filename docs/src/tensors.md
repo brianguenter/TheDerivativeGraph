@@ -14,7 +14,7 @@ Begin by creating the function graph corresponding to the expression ``f_i = A_{
 
 ![Ab](illustrations/Ab/Ab_illustration.svg)
 
-Then transform this into a derivative graph
+Then transform this into a derivative graph, where ``Df_{imn}`` refers to the derivative of ``f`` indexed at ``imn``,
 
 ![Ab_deriv](illustrations/Ab/Ab_illustrationD.svg)
 
@@ -25,10 +25,13 @@ The variable being differentiated wrt is ``A_{mn}``. Create the substitution ``s
 ![Ab_deriv3](illustrations/Ab/Ab_partial_Aij_step3D.svg)
 
 ![Ab_deriv4](illustrations/Ab/Ab_partial_Aij_step4D.svg)
+![Ab_deriv5](illustrations/Ab/Ab_partial_Aij_step5D.svg)
 
 Notice that the substition ``sub((i=>m,j=>n),\sum\limits{j})`` collapses to a no-op. This is because the summation is zero except when ``j=n``; there is only one term in the summation.
 
-Now multiply all the terms on the product path from ``f_{imn}\frac{\partial f_i}{\partial A-{mn}}`` to ``A_{mn}``. This product is ``f_{imn} = 1*1*b_n = b_n``. Note that although the result has three indices ``f_{imn}`` only depends on a single index ``n``. 
+Now multiply all the terms on the product path from ``f_{mmn}=\frac{\partial f_i}{\partial A-{mn}}`` to ``A_{mn}``. This product is ``f_{mmn} = 1*1*b_n = b_n``. Note that although the result has three indices ``f_{mmn}`` two of them are indexed by ``m`` and the result, ``b_n``, depends on a single index ``n``.
+
+The term ``f_{mmn}`` is evaluated by taking all possible values of ``m,n`` which lie within the bounds of those two indices. In this case ``1 \le m \le 2,1 \le n \le 2 ``. All other terms in the 3 dimensional tensor ``f_{mmn}`` are identically 0.
 
 Here's a FastDifferentiation function to compute the derivative symbolically:
 ```julia
@@ -53,8 +56,10 @@ julia> Ab()
   b2  0.0
  0.0   b2
 ```
-As expected ``f_{imn}`` only depends on the ``n`` index. Note that only ``b_n`` has to be stored to represent this 3D tensor. Also note that the order of the summations in the product ``f_{imn}x_{im}`` 
+Note that only ``b_n`` has to be stored to represent this 3D tensor. This represents an exponential savings in memory. As for computation let's compute the product 
 
+LATER
+Also note that the order of the summations in the product ``f_{imn}x_{im}`` 
 ```math
 \begin{aligned}
 f_{imn}x_{im} &= \sum\limits_{i} \sum\limits_{m} \sum\limits_{n} b_n x_{im} \\
