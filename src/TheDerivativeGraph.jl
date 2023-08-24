@@ -8,6 +8,7 @@ include("shared.jl")
 include("reverse_illustrations.jl")
 include("forward_illustrations.jl")
 include("BAx.jl")
+include("Ab.jl")
 
 function write_illustrations()
     dir = "src/illustrations/"
@@ -24,14 +25,15 @@ function write_illustrations()
     end
 
     for Ab_example in Ab_all()
-        full_name = "Ab_example"
-        path = dir * "Ab/" * full_name
+        path = dir * "Ab/"
         if Ab_example === Ab_illustration
             graph = make_dot_graph(Ab_example())
-            write_dot(path * ".svg", graph)
+            write_dot(path * "$(Ab_example)" * ".svg", graph)
+            graph = make_dot_graph(Ab_example(), false)
+            write_dot(path * "$(Ab_example)" * "D.svg", graph)
         else
             graph = make_dot_graph(Ab_example(), false)
-            write_dot(path * "D.svg", graph)
+            write_dot(path * "$(Ab_example)" * "D.svg", graph)
         end
     end
 
