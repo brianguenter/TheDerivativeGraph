@@ -1,3 +1,13 @@
+function Ab()
+    A = make_variables(:A, 2, 2)
+    b = make_variables(:b, 2)
+
+    jac = jacobian(FD.Node.(A * b), vec(A))
+    return FD.Node.(A * b), jac
+    # reshape(jac, 2, 2, 2)
+end
+export Ab
+
 function Ab_illustration()
     n5 = Node("fᵢ", "fᵢ")
     n4 = Node("∑ⱼ", "∑ⱼ")

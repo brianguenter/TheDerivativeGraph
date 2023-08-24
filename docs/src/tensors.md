@@ -1,14 +1,16 @@
-Computing tensor derivatives is conceptually simple, at least for tensor operations that can be represented as sequences of tensor contractions, e.g., ``Ab = \sum\limits_{j} A_{ij}b{j}``. From now on we'll use the notation ``A_{ij}b{j}`` to mean ``\sum\limits_{j} A_{ij}b{j}``
+Computing tensor derivatives is conceptually simple, at least for tensor operations that can be represented as sequences of tensor contractions, e.g., ``Ab = \sum\limits_{j} A_{ij}b{j}`` which applies tensor contraction to the ``j`` index. From now on we'll use the notation ``A_{ij}b{j}`` to mean ``\sum\limits_{j} A_{ij}b{j}``
 
 Differentiation proceeds in simple steps:
 
-* Explicitly mark the indices on all tensor terms.
+* Explicitly mark the indices on all tensor terms. Indices shared between two or more terms indicate a tensor contraction.
 * Transform the tensor expression into a function graph.
 * Transform the function graph into a derivative graph. Change tensor contractions into summation operation nodes.
 * Find the variable being differentiated with respect to and compute index substitutions. 
 * Propagate the index substitutions up the graph.
 
-Let's do a simple example first, before going into the details of why this works: compute ``\frac{\partial f_i}{\partial b_n}`` for ``f_i = A_{ij}b_j``. First, create the function graph corresponding to the expression.
+Let's do several examples first, before going into the details of why this works. The first example is compute ``\frac{\partial f_i}{\partial A-{mn}}`` for ``f_i = A_{ij}b_j``. 
+
+Begin by creating the function graph corresponding to the expression ``f_i = A_{ij}b_j``
 
 ![Ab](illustrations/Ab/Ab_illustration.svg)
 
@@ -16,24 +18,50 @@ Then transform this into a derivative graph
 
 ![Ab_deriv](illustrations/Ab/Ab_illustrationD.svg)
 
-The variable being differentiated wrt is ``b_n``. Create the substitution ``sub(j=>n)`` and apply it to the graph nodes and edges on the product path from ``f_j`` to ``b_j``, beginning with ``b_j`` and working upward:
+The variable being differentiated wrt is ``A_{mn}``. Create the substitution ``sub((i=>m,j=>n))`` and apply it to the graph nodes and edges on the product path from ``f_i`` to ``A_{mn}``, beginning with ``A_{mn}`` and working upward:
 
 ![Ab_deriv1](illustrations/Ab/Ab_partial_Aij_step1D.svg)
 ![Ab_deriv2](illustrations/Ab/Ab_partial_Aij_step2D.svg)
 ![Ab_deriv3](illustrations/Ab/Ab_partial_Aij_step3D.svg)
+
 ![Ab_deriv4](illustrations/Ab/Ab_partial_Aij_step4D.svg)
 
-∂sum(j,Aᵢⱼ*bⱼ)/∂bₖ =sum(j,∂(Aᵢⱼ*bⱼ/∂bₖ))
-    = sum(j, ∂(Aᵢⱼ*/∂bₖ))*bⱼ + Aᵢⱼ*∂bⱼ/∂bₖ
+Notice that the substition ``sub((i=>m,j=>n),\sum\limits{j})`` collapses to a no-op. This is because the summation is zero except when ``j=n``; there is only one term in the summation.
 
-    ∂bⱼ/∂bₖ = except when j=k when it equals 1. 
-    Create expression substitute(j=>k,Aᵢⱼ)
-    this gives:
-    = sum(j, 0*bⱼ + substitute(j=>k,Aᵢⱼ))
-    = substitute(j=>k, sum(j, Aᵢₖ))
-    propagate the substitution expression up through the sum
-    sum(j=k, Aᵢₖ)
-    ∂sum(j,Aᵢⱼ*bⱼ)/∂bₖ = Aᵢₖ
+Now multiply all the terms on the product path from ``f_{imn}\frac{\partial f_i}{\partial A-{mn}}`` to ``A_{mn}``. This product is ``f_{imn} = 1*1*b_n = b_n``. Note that although the result has three indices ``f_{imn}`` only depends on a single index ``n``. 
+
+Here's a FastDifferentiation function to compute the derivative symbolically:
+```julia
+function Ab()
+    A = make_variables(:A, 2, 2)
+    b = make_variables(:b, 2)
+
+    jac = jacobian(FD.Node.(A * b), vec(A))
+    reshape(jac, 2, 2, 2)
+end
+export Ab
+```
+and here's the evaluation:
+```julia
+julia> Ab()
+2×2×2 Array{FastDifferentiation.Node, 3}:
+[:, :, 1] =
+  b1  0.0
+ 0.0   b1
+
+[:, :, 2] =
+  b2  0.0
+ 0.0   b2
+```
+As expected ``f_{imn}`` only depends on the ``n`` index. Note that only ``b_n`` has to be stored to represent this 3D tensor. Also note that the order of the summations in the product ``f_{imn}x_{im}`` 
+
+```math
+\begin{aligned}
+f_{imn}x_{im} &= \sum\limits_{i} \sum\limits_{m} \sum\limits_{n} b_n x_{im} \\
+&=  \sum\limits_{n} b_n \sum\limits_{i} \sum\limits_{m} x_{im}
+\end{aligned}
+```
+can be rearranged to take ``im+b`` multiplications rather than ``imb`` multiplications if summed in the original order. Memory and compute efficiency are two key advantages of the explicit index representation.
 
 
 ```math
