@@ -51,10 +51,13 @@ The illustrations show the differentiation starting from the original function g
 
 This is the function graph corresponding to ``f_k = B_{ki}A_{ij}x_j`` ![BAx](illustrations/BAx/BAx_illustration.svg)
 
-The differentiation steps are shown in order from left to right. First the substitution variables are found by locating the variable node. In each succeeding step the substitution ascends one level in the graph. The final derivative is shown at the far right.
+The differentiation steps are shown in order from left to right. First the substitution variables are found by locating the variable node. In each succeeding step the substitution ascends one level in the graph.
 
 ![BAx partial](illustrations/BAx/BAx_partial_xj_step1D.svg)
 ![BAx partial](illustrations/BAx/BAx_partial_xj_step2D.svg)
+
+ The final derivative is shown at the far right in the figure below.
+
 ![BAx partial](illustrations/BAx/BAx_partial_xj_step3D.svg)
 ![BAx partial](illustrations/BAx/BAx_partial_xj_step4D.svg)
 

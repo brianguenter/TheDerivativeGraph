@@ -33,14 +33,14 @@ function BAx_partial_xj()
     e1, e2, e3, e4, e5, e6 = BAx_illustration()
 
     n2 = bott(e1)
-    n2.color = white
-    n2.label_color = white
-    e1.color = white
-    e1.label_color = white
+    n2.color = de_emph
+    n2.label_color = de_emph
+    e1.color = de_emph
+    e1.label_color = de_emph
     n5 = bott(e4)
-    n5.label_color = white
-    e4.label_color = white
-    e4.color = white
+    n5.label_color = de_emph
+    e4.label_color = de_emph
+    e4.color = de_emph
 
     return (e1, e2, e3, e4, e5, e6)
 end
@@ -80,7 +80,7 @@ function BAx_partial_xj_step4()
     e1, e2, e3, e4, e5, e6 = BAx_partial_xj_step3()
 
     n5 = bott(e5)
-    n5.label_color = white
+    n5.label_color = de_emph
     return (e1, e2, e3, e4, e5, e6)
 end
 export BAx_partial_xj_step4

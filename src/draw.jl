@@ -27,7 +27,8 @@ const red = (0xff, 0x00, 0x00)
 const green = (0x00, 0xff, 0x00)
 const white = (0xff, 0xff, 0xff)
 const black = (0x00, 0x00, 0x00)
-export red, green, blue, white, black
+de_emph = (0xaa, 0xaa, 0xaa)
+export red, green, blue, white, black, de_emph
 
 mutable struct Edge
     const id::Symbol
@@ -72,6 +73,7 @@ export make_dot_graph
 function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
     nodes = unique((top.(edges)..., bott.(edges)...))
     res = """strict digraph{
+        ratio = 1.0
       """
     font_size = 12
     for node in nodes
