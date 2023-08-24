@@ -8,7 +8,7 @@ Differentiation proceeds in simple steps:
 * Find the variable being differentiated with respect to and compute index substitutions. 
 * Propagate the index substitutions up the graph.
 
-Let's do a simple example first, before going into the details of why this works. For this function ``f_j = A_{ij}b_j`` compute ``\frac{\partial f_j}{\partial b_n}``. First, create the function graph corresponding to the expression.
+Let's do a simple example first, before going into the details of why this works: compute ``\frac{\partial f_i}{\partial b_n}`` for ``f_i = A_{ij}b_j``. First, create the function graph corresponding to the expression.
 
 ![Ab](illustrations/Ab/Ab_illustration.svg)
 
@@ -18,7 +18,10 @@ Then transform this into a derivative graph
 
 The variable being differentiated wrt is ``b_n``. Create the substitution ``sub(j=>n)`` and apply it to the graph nodes and edges on the product path from ``f_j`` to ``b_j``, beginning with ``b_j`` and working upward:
 
-
+![Ab_deriv1](illustrations/Ab/Ab_partial_Aij_step1D.svg)
+![Ab_deriv2](illustrations/Ab/Ab_partial_Aij_step2D.svg)
+![Ab_deriv3](illustrations/Ab/Ab_partial_Aij_step3D.svg)
+![Ab_deriv4](illustrations/Ab/Ab_partial_Aij_step4D.svg)
 
 ∂sum(j,Aᵢⱼ*bⱼ)/∂bₖ =sum(j,∂(Aᵢⱼ*bⱼ/∂bₖ))
     = sum(j, ∂(Aᵢⱼ*/∂bₖ))*bⱼ + Aᵢⱼ*∂bⱼ/∂bₖ
