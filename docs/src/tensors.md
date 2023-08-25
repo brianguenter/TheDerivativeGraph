@@ -27,11 +27,12 @@ The variable being differentiated wrt is ``A_{mn}``. Create the substitution ``s
 ![Ab_deriv4](illustrations/Ab/Ab_partial_Aij_step4D.svg)
 ![Ab_deriv5](illustrations/Ab/Ab_partial_Aij_step5D.svg)
 
-Notice that the substition ``sub((i=>m,j=>n),\sum\limits{j})`` collapses to a no-op. This is because the summation is zero except when ``j=n``; there is only one term in the summation.
+Notice that the substition ``sub((i=>m,j=>n),\sum\limits{j})`` collapses to a no-op. This is because the summation is zero except when ``j=n``; there is only one term in the summation. 
 
-Now multiply all the terms on the product path from ``f_{mmn}=\frac{\partial f_i}{\partial A-{mn}}`` to ``A_{mn}``. This product is ``f_{mmn} = 1*1*b_n = b_n``. Note that although the result has three indices ``f_{mmn}`` two of them are indexed by ``m`` and the result, ``b_n``, depends on a single index ``n``.
+Now multiply all the terms on the product path from ``f_{mmn}=\frac{\partial f_i}{\partial A-{mn}}`` to ``A_{mn}``. This product is ``Df_{i=m,mmn} = 1*1*b_n = b_n``. Although the result has three indices ``Df_{i=m,mn}`` there is an equality constraint on the first index, create by the substition rule ``sub((i=>m,i=>n),...)``. Only indices which satisfy this constraint are non-zero. For example``Df[1,1,1]=b_1`` but ``Df[1,2,1]=0`` because the first two indices are not equal. 
 
-The term ``f_{mmn}`` is evaluated by taking all possible values of ``m,n`` which lie within the bounds of those two indices. In this case ``1 \le m \le 2,1 \le n \le 2 ``. All other terms in the 3 dimensional tensor ``f_{mmn}`` are identically 0.
+Even though the derivative is 3 dimensional the only non-zero elements of this tensor are the elements of ``b_n`` so storing the tensor takes space proportional to the size of ``b_n``.
+
 
 Here's a FastDifferentiation function to compute the derivative symbolically:
 ```julia
@@ -56,7 +57,9 @@ julia> Ab()
   b2  0.0
  0.0   b2
 ```
-Note that only ``b_n`` has to be stored to represent this 3D tensor. This represents an exponential savings in memory. As for computation let's compute the product 
+As expected the derivative is non-zero only when the first two indices are equal.
+
+As for computation let's compute the product 
 
 LATER
 Also note that the order of the summations in the product ``f_{imn}x_{im}`` 

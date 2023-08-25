@@ -1,16 +1,17 @@
-function Ab()
+function DAb()
     A = make_variables(:A, 2, 2)
     b = make_variables(:b, 2)
 
     jac = jacobian(FD.Node.(A * b), vec(A))
-    reshape(jac, 2, 2, 2)
+
+    # reshape(jac, 2, 2, 2)
 end
-export Ab
+export DAb
 
 function DAbx()
     x = make_variables(:x, 2, 2)
 
-    jac = Ab()
+    jac = DAb()
     res = zeros(FD.Node, 2)
 
     for index in CartesianIndices(x)
@@ -78,7 +79,7 @@ function Ab_partial_Aij_step5()
     n4 = top(e3)
     n4.derivative_label = ""
     n5 = top(e4)
-    n5.derivative_label = "fₘₘₙ = ∂fᵢ/∂Aₘₙ"
+    n5.derivative_label = "Dfᵢ₌ₘ,ₘₙ = ∂fᵢ/∂Aₘₙ (= 0 when i≠m)"
     return e1, e2, e3, e4
 end
 
