@@ -9,6 +9,7 @@ include("reverse_illustrations.jl")
 include("forward_illustrations.jl")
 include("BAx.jl")
 include("Ab.jl")
+include("convolution.jl")
 
 function write_illustrations()
     dir = "src/illustrations/"
