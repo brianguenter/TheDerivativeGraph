@@ -8,7 +8,15 @@ makedocs(
     pages=[
         "index.md",
         "The Derivative Graph" => "thederivativegraph.md",
-        "Tensor Derivatives" => "tensors.md"
+        "Tensor Derivatives" => [
+            "Introduction" => "tensorintro.md"
+            "Examples" => [
+                "Matrix vector multiplication" => "matvec.md"
+                "Matrix matrix multiplication" => "matmat.md"
+                "Convolution" => "convolution.md"
+            ]
+            "Theory" => "theory.md"
+        ]
     ]
 )
 
