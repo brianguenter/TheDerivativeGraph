@@ -36,9 +36,20 @@ function Ab_illustration()
 end
 export Ab_illustration
 
+function Ab_partial_path()
+    e1, e2, e3, e4 = Ab_illustration()
+
+    n2 = bott(e2)
+    n2.color = de_emph
+    n2.label_color = de_emph
+    e2.color = de_emph
+    e2.label_color = de_emph
+    n1 = bott(e1)
+    return e1, e2, e3, e4
+end
 
 function Ab_partial_Aij_step1()
-    e1, e2, e3, e4 = Ab_illustration()
+    e1, e2, e3, e4 = Ab_partial_path()
 
     n1 = bott(e1)
     n1.derivative_label = "sub((i=>m,j=>n)),Aᵢⱼ"
@@ -69,7 +80,7 @@ function Ab_partial_Aij_step4()
     n4 = top(e3)
     n4.derivative_label = ""
     n5 = top(e4)
-    n5.derivative_label = "sub((i=>m,j=>n), fᵢₘₙ"
+    n5.derivative_label = "sub((i=>m,j=>n), Dfᵢₘₙ"
     return e1, e2, e3, e4
 end
 
@@ -84,4 +95,4 @@ function Ab_partial_Aij_step5()
 end
 
 
-Ab_all() = (Ab_illustration, Ab_partial_Aij_step1, Ab_partial_Aij_step2, Ab_partial_Aij_step3, Ab_partial_Aij_step4, Ab_partial_Aij_step5)
+Ab_all() = (Ab_illustration, Ab_partial_path, Ab_partial_Aij_step1, Ab_partial_Aij_step2, Ab_partial_Aij_step3, Ab_partial_Aij_step4, Ab_partial_Aij_step5)

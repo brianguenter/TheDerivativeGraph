@@ -11,7 +11,7 @@ end
 export BAx
 
 function BAx_illustration()
-    n7 = Node("∑ᵢ", "fₖ=∑ᵢ")
+    n7 = Node("∑ᵢ", "Dfₖₙ = ∑ᵢ")
     n6 = Node("*")
     n5 = Node("∑ⱼ", "∑ⱼ")
     n4 = Node("*")
@@ -50,7 +50,7 @@ function BAx_partial_xj_step1()
     e1, e2, e3, e4, e5, e6 = BAx_partial_xj()
 
     n2 = bott(e2)
-    n2.derivative_label = "sub((j=>n),xⱼ)"
+    n2.derivative_label = "sub((j=n),xⱼ)"
     return (e1, e2, e3, e4, e5, e6)
 end
 export BAx_partial_xj_step1
@@ -61,7 +61,7 @@ function BAx_partial_xj_step2()
 
     n2 = bott(e2)
     n2.derivative_label = "xₙ"
-    e2.label = "sub(j=>n,Aᵢⱼ )"
+    e2.label = "sub(j=n,Aᵢⱼ )"
     return (e1, e2, e3, e4, e5, e6)
 end
 export BAx_partial_xj_step2
@@ -70,7 +70,7 @@ function BAx_partial_xj_step3()
     e1, e2, e3, e4, e5, e6 = BAx_partial_xj_step2()
 
     n5 = bott(e5)
-    n5.derivative_label = "sub((j=>n), ∑ⱼ )"
+    n5.derivative_label = "sub((j=n), ∑ⱼ )"
     e2.label = "Aᵢₙ"
     return (e1, e2, e3, e4, e5, e6)
 end
@@ -80,7 +80,7 @@ function BAx_partial_xj_step4()
     e1, e2, e3, e4, e5, e6 = BAx_partial_xj_step3()
 
     n5 = bott(e5)
-    n5.label_color = de_emph
+    n5.derivative_label = ""
     return (e1, e2, e3, e4, e5, e6)
 end
 export BAx_partial_xj_step4
