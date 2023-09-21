@@ -26,6 +26,17 @@ function index_solution_s()
 end
 export index_solution
 
+function index_solution_f()
+    s = make_variables(:s, 10)
+    f = make_variables(:f, 3)
+    half = length(f) ÷ 2
+
+    Dg(i, u) = 1 ≤ i - u + half + 1 ≤ length(s) ? s[i-u+half+1] : 0
+
+    [Dg(i, u) for i in 1:lastindex(s), u in 1:lastindex(f)]
+end
+export index_solution_f
+
 function convolution_illustration()
 
     n4 = Node("gᵢ = ∑ₖ", "Dgᵢᵤ")
@@ -40,16 +51,24 @@ function convolution_illustration()
 end
 export convolution_illustration
 
-function convolution_partial_s_step0()
+function convolution_partial_s_Dgraph()
     e1, e2, e3 = convolution_illustration()
 
     n4 = top(e3)
     n4.derivative_label = "Dgᵢᵤ = ∑ₖ"
+    e3.label = "1"
+    return e1, e2, e3
+end
+export convolution_partial_s_Dgraph
+
+function convolution_partial_s_step0()
+    e1, e2, e3 = convolution_partial_s_Dgraph()
+
+
     n2 = bott(e2)
     n2.label_color = de_emph
     e2.label_color = de_emph
     e2.color = de_emph
-    e3.label = "1"
     return e1, e2, e3
 end
 export convolution_partial_s_step0
@@ -95,7 +114,51 @@ function convolution_partial_s_step4()
 end
 export convolution_partial_s_step3
 
-convolution_all() = (convolution_illustration, convolution_partial_s_step0, convolution_partial_s_step1, convolution_partial_s_step2, convolution_partial_s_step3, convolution_partial_s_step4)
+
+function convolution_partial_f_step1()
+    e1, e2, e3 = convolution_illustration()
+
+    n4 = top(e3)
+    n4.derivative_label = "Dgᵢᵤ = ∑ₖ"
+    n1 = bott(e1)
+    n1.label_color = de_emph
+    e1.label_color = de_emph
+    e1.color = de_emph
+    n2 = bott(e2)
+    n2.derivative_label = "sub(u=k+half+1,f[k+half+1])"
+    return e1, e2, e3
+end
+export convolution_partial_f_step1
+
+function convolution_partial_f_step2()
+    e1, e2, e3 = convolution_partial_f_step1()
+
+    n2 = bott(e2)
+    n2.derivative_label = "f[u]"
+    e2.label = "sub(u=k+half+1,s[i-k])"
+    return e1, e2, e3
+end
+export convolution_partial_f_step2
+
+function convolution_partial_f_step3()
+    e1, e2, e3 = convolution_partial_f_step2()
+
+
+    e2.label = "sub(u=k+half+1,s[i-k])"
+    return e1, e2, e3
+end
+export convolution_partial_f_step3
+
+function convolution_partial_f_step4()
+    e1, e2, e3 = convolution_partial_f_step3()
+    n4 = top(e3)
+    n4.derivative_label = "Dgᵢᵤ"
+    e2.label = "s[i-u+half+1])"
+    return e1, e2, e3
+end
+export convolution_partial_f_step4
+
+convolution_all() = (convolution_illustration, convolution_partial_s_Dgraph, convolution_partial_s_step0, convolution_partial_s_step1, convolution_partial_s_step2, convolution_partial_s_step3, convolution_partial_s_step4, convolution_partial_f_step1, convolution_partial_f_step2, convolution_partial_f_step3, convolution_partial_f_step4)
 export convolution_all
 
 
