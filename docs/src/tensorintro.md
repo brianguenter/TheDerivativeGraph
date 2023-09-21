@@ -1,9 +1,7 @@
 To compute tensor derivatives efficiently we will use a symbolic index representation. This has several benefits:
 * Unlike other tensor differentiation systems which may apply many complex tensor identities to simplify an expression we will use a single simple operation: tensor contraction.
 * In the symbolic index form all operations are scalar which gives the AD algorithm designer great flexibility to rearrange the order of operations. An important use of this feature is operator fusion. Another is tiling.
-* Tensor differentiation tends to create tensors that are sparse. In many cases this sparsity is explicitly represented by constraint equations on the symbolic indices. This dramatically reduces computation and memory usage.
-
-Computing tensor derivatives is conceptually simple, at least for tensor operations that can be represented as sequences of tensor contraction. This may seem restrictive but tensor contraction covers a lot of territory. 
+* Tensor differentiation tends to create tensors that are sparse. This sparsity is represented by constraint equations on the symbolic indices. Only element which satisfy the equations are non-zero which can greatly reduces storage and computation.
 
 A tensor contraction is a summation along one or more indices. Using Einstein notation a contraction occurs whenever two terms have matching indices. For example, matrix-vector multiplication can be written as a tensor contraction
 ```math
