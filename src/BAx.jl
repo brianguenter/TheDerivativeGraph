@@ -10,6 +10,13 @@ function BAx()
 end
 export BAx
 
+function index_solution_x()
+    B = make_variables(:B, 2, 2)
+    A = make_variables(:A, 2, 2)
+    [sum([B[k, i] * A[i, n] for i in 1:size(B)[2]]) for k in 1:size(B)[1], n in 1:size(A)[2]]
+end
+export index_solution_x
+
 function BAx_illustration()
     n7 = Node("∑ᵢ", "Dfₖₙ = ∑ᵢ")
     n6 = Node("*")

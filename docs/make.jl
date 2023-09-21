@@ -1,10 +1,8 @@
 using Documenter
-using TheDerivativeGraph
 
 makedocs(
     sitename="TheDerivativeGraph",
-    format=Documenter.HTML(),
-    modules=[TheDerivativeGraph],
+    # modules=[TheDerivativeGraph],
     pages=[
         "index.md",
         "The Derivative Graph" => "thederivativegraph.md",
@@ -17,7 +15,27 @@ makedocs(
             ]
             "Theory" => "theory.md"
         ]
-    ]
+    ],
+    # format=Documenter.LaTeX()
+    # format=Documenter.HTML(
+    #     mathengine=KaTeX(Dict(
+    #         :delimiters => [
+    #             Dict(:left => raw"$", :right => raw"$", display => false),
+    #             Dict(:left => raw"$$", :right => raw"$$", display => true),
+    #             Dict(:left => raw"\[", :right => raw"\]", display => true),
+    #         ],
+    #         :packages => ["cancel"]
+    #     )
+    #     ))
+
+    # format=Documenter.HTML(
+    #     mathengine=MathJax3(Dict(
+    #         :tex => Dict(
+    #             "inlineMath" => [["\$", "\$"], ["\\(", "\\)"]],
+    #             "tags" => "ams",
+    #             "packages" => ["base", "ams", "autoload", "cancel"],
+    #         ),
+    #     )))
 )
 
 deploydocs(

@@ -11,6 +11,23 @@ include("BAx.jl")
 include("Ab.jl")
 include("convolution.jl")
 
+function do_convolution(dir)
+    for conv_example in convolution_all()
+        full_name = "$conv_example"
+
+        path = dir * "convolution/" * full_name
+
+        if conv_example === convolution_illustration
+            graph = make_dot_graph(conv_example())
+            write_dot(path * ".svg", graph)
+        else
+            graph = make_dot_graph(conv_example(), false)
+            write_dot(path * "D.svg", graph)
+        end
+    end
+end
+export do_convolution
+
 function write_illustrations()
     dir = "src/illustrations/"
     for mod in Shared.modifiers
@@ -51,6 +68,8 @@ function write_illustrations()
             write_dot(path * "D.svg", graph)
         end
     end
+
+    do_convolution(dir)
 
 end
 export write_illustrations
