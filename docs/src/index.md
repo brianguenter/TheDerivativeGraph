@@ -24,6 +24,19 @@ What is automatic differentiation? An algorithm which computes the sum of produc
 
 
 ## Creating an AD algorithm from scratch
+
+
+###  R¹->R¹
+![Basic Forward](illustrations/basic_forward_example.svg)
+
+Sort D products by smallest index. Find products with longest shared prefix, $D_i, D_k, ..., D_m$ where $i < k ... < m$. Compute this value as $((D_i D_k) ... D_m$. If the paths  and factor out the prefix from each of the terms. Repeat this factorization recursively.  
+$$\begin{equation}
+\begin{split}
+\frac{\partial f}{\partial x} = D_1 D_2 D_4 + D_1 D_3 D_4 \\
+= D_1(D_2 D_4 + D_3 D_4)
+\end{split}
+\end{equation}
+$$
 ###  R¹->Rⁿ
 ![Path 1](illustrations/Forward_binary_tree_bin_path1.svg)
 ![Path 2](illustrations/Forward_binary_tree_bin_path2.svg)

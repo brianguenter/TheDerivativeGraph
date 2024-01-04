@@ -69,6 +69,9 @@ function write_illustrations()
         end
     end
 
+    graph = make_dot_graph(Forward.basic_forward_example())
+    write_dot(dir * "$basic_forward_example.svg", graph)
+
     do_convolution(dir)
 
 end

@@ -1,8 +1,6 @@
 module Shared
 using TheDerivativeGraph
 
-
-
 function bin_path1(e)
     e[1].color = red
     e[2].color = red

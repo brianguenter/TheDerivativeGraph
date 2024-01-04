@@ -24,7 +24,20 @@ function binary_tree()
 end
 export binary_tree
 
-const graphs = [binary_tree]
+
+function basic_forward_example()
+    n1 = Node("f")
+    n2 = Node("")
+    n3 = Node("")
+    n4 = Node("x")
+    e1 = Edge("D₁", n1, n2)
+    e2 = Edge("D₂", n2, n3)
+    e3 = Edge("D₃", n2, n3)
+    e4 = Edge("D₄", n3, n4)
+    return (e1, e2, e3, e4)
+end
+
+const graphs = [binary_tree, basic_forward_example]
 
 export graphs
 end #module

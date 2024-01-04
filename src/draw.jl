@@ -72,7 +72,7 @@ export make_dot_graph
 
 function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
     nodes = unique((top.(edges)..., bott.(edges)...))
-    res = """strict digraph{
+    res = """digraph{
         ratio = 1.0
       """
     font_size = 12
