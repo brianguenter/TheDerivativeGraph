@@ -9,3 +9,6 @@ DocumenterTools = "35a29f4d-8980-5a13-9543-d66fff28ecb8"
 FastDifferentiation = "eb9bf01b-bf85-4b60-bf87-ee5de06c00be"
 LiveServer = "16fef848-5104-11e9-1b77-fb7a48bbb589"
 TestItemRunner = "f8b46487-2199-4994-9208-9a1283c18c0a"
+
+[compat]
+FastDifferentiation = "0.4"
