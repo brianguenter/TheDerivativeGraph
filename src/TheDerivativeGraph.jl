@@ -3,6 +3,7 @@ using FastDifferentiation
 import FastDifferentiation as FD
 
 include("draw.jl")
+include("exp_x_squared.jl")
 include("function_illustrations.jl")
 include("shared.jl")
 include("reverse_illustrations.jl")
@@ -29,7 +30,7 @@ end
 export do_convolution
 
 function write_illustrations()
-    dir = "src/illustrations/"
+    dir = "docs/src/illustrations/"
     for mod in Shared.modifiers
         for package in (Forward, Reverse)
             full_name = "$(package)_$(package.binary_tree)_$mod"
@@ -70,7 +71,12 @@ function write_illustrations()
     end
 
     graph = make_dot_graph(Forward.basic_forward_example())
-    write_dot(dir * "$basic_forward_example.svg", graph)
+    write_dot(dir * "$(Forward.basic_forward_example).svg", graph)
+
+    graph = make_dot_graph(exp_x_squared())
+    write_dot(dir * "$exp_x_squared.svg",graph)
+    graph = make_dot_graph(exp_x_squared(),false)
+    write_dot(dir * "$exp_x_squared" * "D.svg",graph)
 
     do_convolution(dir)
 

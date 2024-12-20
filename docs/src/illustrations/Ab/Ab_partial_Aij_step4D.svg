@@ -8,58 +8,58 @@
  viewBox="0.00 0.00 193.62 193.77" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(4 189.77)">
 <polygon fill="white" stroke="none" points="-4,4 -4,-189.77 189.62,-189.77 189.62,4 -4,4"/>
-<!-- ##node#13932 -->
+<!-- ##node#5702 -->
 <g id="node1" class="node">
-<title>##node#13932</title>
+<title>##node#5702</title>
 <ellipse fill="#ffffff" stroke="#ffffff" cx="92.81" cy="-68" rx="0.5" ry="0.5"/>
 </g>
-<!-- ##node#13934 -->
+<!-- ##node#5704 -->
 <g id="node4" class="node">
-<title>##node#13934</title>
+<title>##node#5704</title>
 <ellipse fill="#ffffff" stroke="#ffffff" cx="69.81" cy="-9" rx="12.96" ry="9.39"/>
 <text text-anchor="middle" x="69.81" y="-5.9" font-family="Times New Roman,serif" font-size="12.00" fill="#000000">Aₘₙ</text>
 </g>
-<!-- ##node#13932&#45;&gt;##node#13934 -->
+<!-- ##node#5702&#45;&gt;##node#5704 -->
 <g id="edge1" class="edge">
-<title>##node#13932&#45;&gt;##node#13934</title>
+<title>##node#5702&#45;&gt;##node#5704</title>
 <path fill="none" stroke="#0000ff" d="M92.56,-67.06C91.46,-65.08 86.87,-56.7 83.81,-49.5 79.37,-39.06 75.14,-26.67 72.51,-18.59"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="72.51,-18.59 72.51,-18.59 72.51,-18.59 72.51,-18.59"/>
 <text text-anchor="middle" x="88.81" y="-39.9" font-family="Times New Roman,serif" font-size="12.00" fill="#000000">bₙ</text>
 </g>
-<!-- ##node#13933 -->
+<!-- ##node#5703 -->
 <g id="node5" class="node">
-<title>##node#13933</title>
+<title>##node#5703</title>
 <ellipse fill="#ffffff" stroke="#aaaaaa" cx="115.81" cy="-9" rx="5.82" ry="9.39"/>
 <text text-anchor="middle" x="115.81" y="-5.9" font-family="Times New Roman,serif" font-size="12.00" fill="#aaaaaa">bⱼ</text>
 </g>
-<!-- ##node#13932&#45;&gt;##node#13933 -->
+<!-- ##node#5702&#45;&gt;##node#5703 -->
 <g id="edge2" class="edge">
-<title>##node#13932&#45;&gt;##node#13933</title>
+<title>##node#5702&#45;&gt;##node#5703</title>
 <path fill="none" stroke="#aaaaaa" d="M92.87,-67.34C93.91,-64.75 106.8,-32.52 112.79,-17.55"/>
 <polygon fill="#aaaaaa" stroke="#aaaaaa" points="112.79,-17.55 112.79,-17.55 112.79,-17.55 112.79,-17.55"/>
 <text text-anchor="middle" x="111.31" y="-39.9" font-family="Times New Roman,serif" font-size="12.00" fill="#aaaaaa">Aᵢⱼ</text>
 </g>
-<!-- ##node#13931 -->
+<!-- ##node#5701 -->
 <g id="node2" class="node">
-<title>##node#13931</title>
+<title>##node#5701</title>
 <ellipse fill="#ffffff" stroke="#ffffff" cx="92.81" cy="-118" rx="0.5" ry="0.5"/>
 </g>
-<!-- ##node#13931&#45;&gt;##node#13932 -->
+<!-- ##node#5701&#45;&gt;##node#5702 -->
 <g id="edge3" class="edge">
-<title>##node#13931&#45;&gt;##node#13932</title>
+<title>##node#5701&#45;&gt;##node#5702</title>
 <path fill="none" stroke="#0000ff" d="M92.81,-117.36C92.81,-114.58 92.81,-71.33 92.81,-68.63"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="92.81,-68.63 92.81,-68.63 92.81,-68.63 92.81,-68.63"/>
 <text text-anchor="middle" x="96.31" y="-89.9" font-family="Times New Roman,serif" font-size="12.00" fill="#000000">1</text>
 </g>
-<!-- ##node#13930 -->
+<!-- ##node#5700 -->
 <g id="node3" class="node">
-<title>##node#13930</title>
+<title>##node#5700</title>
 <ellipse fill="#ffffff" stroke="#ffffff" cx="92.81" cy="-177" rx="74.49" ry="9.39"/>
 <text text-anchor="middle" x="92.81" y="-173.9" font-family="Times New Roman,serif" font-size="12.00" fill="#000000">sub((i=&gt;m,j=&gt;n), Dfᵢₘₙ</text>
 </g>
-<!-- ##node#13930&#45;&gt;##node#13931 -->
+<!-- ##node#5700&#45;&gt;##node#5701 -->
 <g id="edge4" class="edge">
-<title>##node#13930&#45;&gt;##node#13931</title>
+<title>##node#5700&#45;&gt;##node#5701</title>
 <path fill="none" stroke="#0000ff" d="M92.81,-167.52C92.81,-152.52 92.81,-122.56 92.81,-118.87"/>
 <polygon fill="#0000ff" stroke="#0000ff" points="92.81,-118.87 92.81,-118.87 92.81,-118.87 92.81,-118.87"/>
 <text text-anchor="middle" x="96.31" y="-139.9" font-family="Times New Roman,serif" font-size="12.00" fill="#000000">1</text>
