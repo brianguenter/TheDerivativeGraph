@@ -12,4 +12,5 @@ TestItemRunner = "f8b46487-2199-4994-9208-9a1283c18c0a"
 Typstry = "f0ed7684-a786-439e-b1e3-3b82803b501e"
 
 [compat]
+Documenter = "1"
 Typstry = "0.4.0"
