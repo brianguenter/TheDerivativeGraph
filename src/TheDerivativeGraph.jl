@@ -11,6 +11,7 @@ include("forward_illustrations.jl")
 include("BAx.jl")
 include("Ab.jl")
 include("convolution.jl")
+include("juliacon2025.jl")
 
 function do_convolution(dir)
     for conv_example in convolution_all()
@@ -29,8 +30,7 @@ function do_convolution(dir)
 end
 export do_convolution
 
-function write_illustrations()
-    dir = "docs/src/illustrations/"
+function write_illustrations(dir = "docs/src/illustrations/")
     for mod in Shared.modifiers
         for package in (Forward, Reverse)
             full_name = "$(package)_$(package.binary_tree)_$mod"
@@ -83,12 +83,16 @@ function write_illustrations()
 end
 export write_illustrations
 
-# function sum_of_squares()
-#     A = make_variables(:A,3,3)
-#     b = make_variables(:b,3)
-
-#     tmp = Node.(A*b)
-
+function write_JuliaCon(dir = "JuliaCon2025/images/")
+    graph = make_dot_graph(JuliaCon2025.example1())
+   
+    name = "$(JuliaCon2025.example1)"
+    write_dot(dir * "$name.svg",graph)
+    graph = make_dot_graph(JuliaCon2025.example1(),false)
+    println(graph)
+    write_dot(dir * "$name" * "D.svg",graph)
+end
+export write_JuliaCon
 
 
 end #module

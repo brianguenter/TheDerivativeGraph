@@ -48,43 +48,30 @@
   $
     (partial f(g_1(x_1,...x_n),g_2(x_1...x_n),...g_m(x_1,...,x_n))) / (partial x_i) = sum_(j=1)^m ((partial f) / (partial g_j)) (partial g_j) / (partial x_i)
   $
-  Breadth first evaluation example:
-  $
-    g_1(x,y) &= y x^2 \
-    g_2(x,y) &= x y^2 \
-    f(g_1(x,y),g_2(x,y)) &= g_1(x,y) g_2(x,y)
-  $
-
-  $
-    (partial f) / partial(x) &= (partial f) / (partial g_1) (partial g_1(x,y)) / (partial x) + (partial f) / (partial g_2) (partial g_2(x,y)) \
-    &= (partial f) / (partial g_1) (partial y x^2) / (partial x) + (partial f) / (partial g_2) (partial g_2(x,y))
-  $
-  Depth first evaluation:
-  $
-    partial f(x,y) &= exp(*(*(x,x),x)) \
-    partial f(x,y) / (partial x) &= (partial exp(a)) / (partial a) (partial a) / (partial x) && && a = *(*(x,x),x) \
-    &= exp(a) (partial *(b,x)) / (partial x) && b = *(x,x) \
-    &= exp(a) ((partial *(b,x)) / (partial b) (partial b) / (partial x) + (partial *(b,x)) / (partial x) (partial x) / (partial x)) \
-    &= exp(a) (x dot partial(*(x,x)) / (partial x)+ b dot 1) \
-    &= exp(a) (x dot (partial(x) / (partial x) x + x (partial x) / (partial x)) + b dot 1) \
-    &= exp(a) (x dot (x + x) + b)
-  $
-  Theorems can be created with the `#theorem` command. Similarly, there are `#proof`, `#definition`, `#example`, `#lemma`, and `#corollary`. \
-  For example, here is a theorem:
-  #theorem(title: "Important one")[
-    Using theorems is easy.
-  ]
-  #proof[
-    This was very easy, wasn't it?
-  ]
-  A definition already given by well-known mathematicians @Author1978definition is:
-  #definition(title: "Important stuff")[
-    _Important stuff_ is defined as the stuff that is important to me:
-    $
-      exp(upright(i) pi) + 1 = 0.
-    $
-  ]
 ]
+#slide(title: "Example")[
+  Given: $f(x) = exp(cos(x)*cos(x))$ \
+  find $(text("d") f(x)) / (text("d") x)$ \ \
+
+  Let $#sym.space c = a*b, #sym.space a= cos(x) , #sym.space b= cos(x), #sym.space f(x) = exp(c)$
+  $
+    (text("d") f(x)) / (text("d") x) &= (text("d") exp(c)) / (text("d") x) \
+    &= (partial exp(c)) / (partial c) ((partial c) / (partial a) (text("d") a) / (text("d") x)+ (partial c) / (partial b)(text("d") b) / (text("d") x)) \
+    &= exp(c)(b(-sin(x)) + a(-sin(x))) && (partial a*b) / (partial a) = b, (partial a*b) / (partial b) = a\
+    &= exp(c)(-(b+a)sin(x)) \
+    &= exp(cos(x)*cos(x))(-(cos(x) + cos(x))sin(x)) \
+    &= -2exp(cos(x)*cos(x))cos(x)sin(x)
+  $
+]
+#slide(title: "Example in graphical form")[
+  #subpar.grid(
+    columns: 2,
+    gutter: 50mm,
+    figure(image("images/example1.svg", width: 40%), caption: "Original function"),
+    figure(image("images/example1D.svg", width: 40%), caption: "Derivative graph"),
+  )
+]
+
 
 #slide(title: "Equations")[
   Equations with a label with a label will be numbered automatically:
