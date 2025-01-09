@@ -30,7 +30,7 @@ function do_convolution(dir)
 end
 export do_convolution
 
-function write_illustrations(dir = "docs/src/illustrations/")
+function write_illustrations(dir="docs/src/illustrations/")
     for mod in Shared.modifiers
         for package in (Forward, Reverse)
             full_name = "$(package)_$(package.binary_tree)_$mod"
@@ -74,23 +74,33 @@ function write_illustrations(dir = "docs/src/illustrations/")
     write_dot(dir * "$(Forward.basic_forward_example).svg", graph)
 
     graph = make_dot_graph(exp_x_squared())
-    write_dot(dir * "$exp_x_squared.svg",graph)
-    graph = make_dot_graph(exp_x_squared(),false)
-    write_dot(dir * "$exp_x_squared" * "D.svg",graph)
+    write_dot(dir * "$exp_x_squared.svg", graph)
+    graph = make_dot_graph(exp_x_squared(), false)
+    write_dot(dir * "$exp_x_squared" * "D.svg", graph)
 
     do_convolution(dir)
 
 end
 export write_illustrations
 
-function write_JuliaCon(dir = "JuliaCon2025/images/")
-    graph = make_dot_graph(JuliaCon2025.example1())
-   
-    name = "$(JuliaCon2025.example1)"
-    write_dot(dir * "$name.svg",graph)
-    graph = make_dot_graph(JuliaCon2025.example1(),false)
-    println(graph)
-    write_dot(dir * "$name" * "D.svg",graph)
+function function_svg(dir, graph_func)
+    graph = make_dot_graph(graph_func())
+    name = "$(graph_func)"
+    write_dot(dir * "$name.svg", graph)
+end
+
+function derivative_svg(dir, graph_func)
+    graph = make_dot_graph(graph_func(), false)
+    name = "$(graph_func)"
+    write_dot(dir * "$name" * "D.svg", graph)
+end
+
+function write_JuliaCon(dir="JuliaCon2025/images/")
+    function_svg(dir, JuliaCon2025.example1)
+    derivative_svg(dir, JuliaCon2025.example1)
+
+    derivative_svg(dir, JuliaCon2025.example1_path1)
+    derivative_svg(dir, JuliaCon2025.example1_path2)
 end
 export write_JuliaCon
 

@@ -1,5 +1,6 @@
 #import "@preview/touying:0.5.3": *
 #import "@preview/clean-math-presentation:0.1.0": *
+#import "@preview/subpar:0.2.0"
 
 #show: clean-math-presentation-theme.with(
   config-info(
@@ -50,29 +51,45 @@
   $
 ]
 #slide(title: "Example")[
-  Given: $f(x) = exp(cos(x)*cos(x))$ \
-  find $(text("d") f(x)) / (text("d") x)$ \ \
+    Given: 
 
-  Let $#sym.space c = a*b, #sym.space a= cos(x) , #sym.space b= cos(x), #sym.space f(x) = exp(c)$
+$  f(x) = g(h(a(x),b(x)))$
+
+compute $ (text("d") f(x)) / (text("d") x)$
+
   $
-    (text("d") f(x)) / (text("d") x) &= (text("d") exp(c)) / (text("d") x) \
-    &= (partial exp(c)) / (partial c) ((partial c) / (partial a) (text("d") a) / (text("d") x)+ (partial c) / (partial b)(text("d") b) / (text("d") x)) \
-    &= exp(c)(b(-sin(x)) + a(-sin(x))) && (partial a*b) / (partial a) = b, (partial a*b) / (partial b) = a\
-    &= exp(c)(-(b+a)sin(x)) \
-    &= exp(cos(x)*cos(x))(-(cos(x) + cos(x))sin(x)) \
-    &= -2exp(cos(x)*cos(x))cos(x)sin(x)
+    (text("d") f(x)) / (text("d") x)   &= (partial g) / (partial h) ((partial h) / (partial a) (text("d") a) / (text("d") x)+ (partial h) / (partial b)(text("d") b) / (text("d") x)) \
+   &= (partial g) / (partial h) (partial h) / (partial a) (text("d") a) / (text("d") x)+(partial g) / (partial h)(partial h) / (partial b)(text("d") b) / (text("d") x)
   $
 ]
+
 #slide(title: "Example in graphical form")[
   #subpar.grid(
     columns: 2,
     gutter: 50mm,
-    figure(image("images/example1.svg", width: 40%), caption: "Original function"),
-    figure(image("images/example1D.svg", width: 40%), caption: "Derivative graph"),
+    figure(image("images/example1.svg", width: 100%), caption: $text("Original function:") = g(h(a(x),b(x)))$),
+    figure(image("images/example1D.svg", width: 100%), caption: $text("Derivative graph") = (partial g) / (partial h) (partial h) / (partial a) (text("d") a) / (text("d") x) +
+    (partial g) / (partial h)(partial h) / (partial b)(text("d") b) / (text("d") x)$
+  )
   )
 ]
 
+#slide(title: "Example in graphical form")[
+  $
+    (text("d") f(x)) / (text("d") x)   &= underbrace((partial g) / (partial h) (partial h) / (partial a) (text("d") a) / (text("d") x), "product path 1") + 
+    underbrace((partial g) / (partial h)(partial h) / (partial b)(text("d") b) / (text("d") x),"product path 2")
+  $
+  #subpar.grid(
+    columns: 2,
+    gutter: 50mm,
+    figure(image("images/example1_path1D.svg", width: 80%), caption: $text("product path 1") = (partial g) / (partial h) (partial h) / (partial a) (text("d") a) / (text("d") x)$),
+    figure(image("images/example1_path2D.svg", width: 80%), caption: $text(fill: #green,"product path 2") = (partial g) / (partial h)(partial h) / (partial b)(text("d") b) / (text("d") x)$),
+  )
+]
 
+#slide(title:"Sum of path products")[
+  The derivative $(partial f_i)/(partial x_j)$ of $bold(f)(bold(x)) = [f_1(bold(x)),f_2(bold(x))...f_m (bold(x))]$ is equal to the sum of all the path products from $f_i$ to $x_j$
+]
 #slide(title: "Equations")[
   Equations with a label with a label will be numbered automatically:
   $
