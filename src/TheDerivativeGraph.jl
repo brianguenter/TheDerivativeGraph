@@ -1,6 +1,7 @@
 module TheDerivativeGraph
 using FastDifferentiation
 import FastDifferentiation as FD
+import ForwardDiff
 
 include("draw.jl")
 include("exp_x_squared.jl")
@@ -12,6 +13,7 @@ include("BAx.jl")
 include("Ab.jl")
 include("convolution.jl")
 include("juliacon2025.jl")
+include("SymbolicForward.jl")
 
 function do_convolution(dir)
     for conv_example in convolution_all()
@@ -101,6 +103,18 @@ function write_JuliaCon(dir="JuliaCon2025/images/")
 
     derivative_svg(dir, JuliaCon2025.example1_path1)
     derivative_svg(dir, JuliaCon2025.example1_path2)
+    for func in (JuliaCon2025.exponential_paths,
+        JuliaCon2025.exponential_paths1,
+        JuliaCon2025.exponential_paths2,
+        JuliaCon2025.exponential_paths3,
+        JuliaCon2025.exponential_paths4)
+
+        derivative_svg(dir, func)
+    end
+
+    derivative_svg(dir, JuliaCon2025.example1_sequence)
+    function_svg(dir, JuliaCon2025.function_to_derivative)
+    derivative_svg(dir, JuliaCon2025.function_to_derivative)
 end
 export write_JuliaCon
 

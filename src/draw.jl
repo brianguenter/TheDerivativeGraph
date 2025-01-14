@@ -1,6 +1,6 @@
 mutable struct Node
     const id::Symbol
-    const function_label::String
+    function_label::String
     derivative_label::String
     color::NTuple{3,UInt8}
     label_color::NTuple{3,UInt8}
@@ -43,7 +43,9 @@ end
 export Edge
 
 top(e::Edge) = e.top
+export top
 bott(e::Edge) = e.bott
+export bott
 id(e::Edge) = "\"e.id\""
 label(e::Edge) = "\"$(e.label)\""
 color(e::Edge) = e.color
@@ -74,6 +76,7 @@ function make_dot_graph(edges::NTuple{N,Edge}, function_graph=true) where {N}
     nodes = unique((top.(edges)..., bott.(edges)...))
     res = """digraph{
         ratio = 1.0
+        splines = line
       """
     font_size = 12
     for node in nodes
