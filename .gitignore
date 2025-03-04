@@ -6,4 +6,7 @@
 
 test/.vscode/settings.json
 
+*.json
+Manifest.toml
+
 main.pdf
